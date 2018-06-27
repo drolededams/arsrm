@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/27 17:14:09 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/06/27 19:55:31 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <libfta.h>
+#include <unistd.h>
 
-void	ft_bzero(void *s, size_t n);
+/*void	ft_bzero(void *s, size_t n);
 char	*ft_strcat(char *dest, const char *src);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -29,7 +31,8 @@ void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 char	*ft_strdup(const char *s1);
 void	ft_cat(int fd);
-
+*/
+//gcc -Wall -Wextra -Werror -I./ -L./ -lfts main.c
 int		main(void)
 {
 	char str[6] = "Salut";
@@ -51,6 +54,14 @@ int		main(void)
 	printf("str 2 = %s\n", str2);
 	printf("cat str1 + str2 = %s\n", ft_strcat(cstr, str2));
 	printf("str 1 = %s\n", cstr);
+	char	buf[9];
+
+	bzero(buf, 9);
+	ft_strcat(buf, "");
+	ft_strcat(buf, "Bon");
+	ft_strcat(buf, "j");
+	ft_strcat(buf, "our.");
+	printf("buf = %s\n", buf);
 
 	printf("\nalpha test\n");
 	printf("a = %d\n", ft_isalpha('a'));
@@ -105,6 +116,9 @@ int		main(void)
 	printf("add %p\n", cstr);
 	printf("str 1 = %s\n", cstr);
 	printf("len %lu\n", ft_strlen(cstr));
+
+	ft_puts("aaa");
+	ft_puts(NULL);
 
 	printf("\nmemset test\n");
 	ft_puts(str3);

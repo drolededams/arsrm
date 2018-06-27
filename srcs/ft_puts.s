@@ -10,6 +10,8 @@ _ft_puts:
 	xor rax, rax
 	dec rax
 	mov r8, rdi
+	cmp rdi, 0x00
+	je prin_nul
 	push rdi
 
 looping:
@@ -18,7 +20,6 @@ looping:
 	jne looping
 
 nl:
-	inc rax
 	mov rdi, 1
 	mov rsi, r8
 	mov rdx, rax
@@ -32,5 +33,11 @@ nl:
 	pop rdi
 	ret
 
-
+prin_nul:
+	mov rdi, 1
+	lea rsi, [rel new_line]
+	mov rdx, 7
+	mov rax, 0x02000004
+	syscall
+	ret
 
