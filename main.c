@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/27 19:55:31 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/07/01 14:59:13 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,40 @@ void	ft_cat(int fd);
 //gcc -Wall -Wextra -Werror -I./ -L./ -lfts main.c
 int		main(void)
 {
+	char buf[9];
+	bzero(buf, 9);
+	ft_strcat(buf, "");
+	ft_strcat(buf, "Bon");
+	ft_strcat(buf, "j");
+	ft_strcat(buf, "our.");
+	printf("buf = %s\n", buf);
+	if (strcmp(buf, "Bonjour.") == 0)
+		printf("buf ok = %s\n", buf);
+	if (buf == ft_strcat(buf, ""))
+		printf("buf oko = %s\n", buf);
+	char		*ret1;
+	char		*ret2;
+	printf("bzero test\n");
+	ret1 = strdup("");
+	printf("bzero test\n");
+	ret2 = ft_strdup("");
+	printf("bzero test\n");
+	ft_puts(ret2);
+	if (strcmp(ret1, ret2) != 0)
+		printf("No match 1st test\n");
+	printf("bzero test\n");
+	free(ret1);
+	printf("bzero test\n");
+	free(ret2);
+	printf("bzero test\n");
+	ret1 = strdup("hello");
+	printf("bzero test\n");
+	ret2 = ft_strdup("hello");
+	printf("bzero test\n");
+	if (strcmp(ret1, ret2) != 0)
+		printf("No match 2nd test\n");
+	free(ret1);
+	free(ret2);
 	char str[6] = "Salut";
 	char cstr[13] = "Salut       ";
 	cstr[5] = 0;
@@ -54,7 +88,6 @@ int		main(void)
 	printf("str 2 = %s\n", str2);
 	printf("cat str1 + str2 = %s\n", ft_strcat(cstr, str2));
 	printf("str 1 = %s\n", cstr);
-	char	buf[9];
 
 	bzero(buf, 9);
 	ft_strcat(buf, "");
@@ -62,6 +95,10 @@ int		main(void)
 	ft_strcat(buf, "j");
 	ft_strcat(buf, "our.");
 	printf("buf = %s\n", buf);
+	if (strcmp(buf, "Bonjour.") == 0)
+		printf("buf ok = %s\n", buf);
+	if (buf == ft_strcat(buf, ""))
+		printf("buf oko = %s\n", buf);
 
 	printf("\nalpha test\n");
 	printf("a = %d\n", ft_isalpha('a'));
@@ -139,10 +176,45 @@ int		main(void)
 
 	printf("\nstrdup test\n");
 	char *str4;
+	char *str5;
+	char *str6;
+	char *str7;
 	str4 = ft_strdup(cstr);
+	str5 = ft_strdup("42");
 	ft_puts(str4);
+	printf("str5 = %s\n", str5);
+	ft_puts(str5);
 	ft_puts(ft_strdup(cstr));
 	ft_puts(cstr);
+	str6 = ft_strdup("");
+	str7 = strdup("");
+	if (strcmp(str6, str7) != 0)
+		printf("No match 1st test\n");
+	printf("free str7\n");
+	free(str7);
+	printf("free str6\n");
+	free(str6);
+	printf("dup str6\n");
+	str6 = ft_strdup("hello");
+	printf("dup str7\n");
+	str7 = strdup("hello");
+	if (strcmp(str6, str7) != 0)
+		printf("No match 2nd test\n");
+	free(str6);
+	free(str7);
+
+	ret1 = strdup("");
+	ret2 = ft_strdup("");
+	if (strcmp(ret1, ret2) != 0)
+		printf("No match 1st test\n");
+	free(ret1);
+	free(ret2);
+	ret1 = strdup("hello");
+	ret2 = ft_strdup("hello");
+	if (strcmp(ret1, ret2) != 0)
+		printf("No match 2nd test\n");
+	free(ret1);
+	free(ret2);
 
 	printf("\ncat test\n");
 	int fd;
@@ -154,5 +226,16 @@ int		main(void)
 	}
 	else
 		printf("erreur open (a tester plus tard)\n");
+	ssize_t a;
+
+	a = read(42, buf, 9);
+	printf("a=== %zd\n", a);
+	printf("a=== %zd\n", sizeof(ssize_t));
+	printf("\ncat test\n");
+	ft_cat(-1);
+	printf("\ncat test\n");
+	ft_cat(0);
+	printf("\ncat test\n");
+	ft_cat(42);
 	return (0);
 }

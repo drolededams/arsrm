@@ -34,10 +34,12 @@ nl:
 	ret
 
 prin_nul:
+	push r12
 	mov rdi, 1
 	lea rsi, [rel new_line]
 	mov rdx, 7
 	mov rax, 0x02000004
 	syscall
+	pop r12
 	ret
 
