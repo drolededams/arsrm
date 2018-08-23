@@ -6,9 +6,6 @@ extern _ft_memcpy
 section .text
 
 _ft_strdup:
-	;push rbp
-	;mov rbp, rsp
-	;sub rsp, 8
 	push rdi
 	call _ft_strlen
 	cmp rax, 0
@@ -16,7 +13,6 @@ _ft_strdup:
 	mov rdi, rax
 	push rax
 	push r8
-	;sub rsp, 8
 	call _malloc
 	cmp rax, 0
 	je retnul2
@@ -32,7 +28,6 @@ retnul:
 	mov rdi, 1
 	push rax
 	push r8
-	;sub rsp, 8
 	call _malloc
 	cmp rax, 0
 	je retnul2
@@ -41,8 +36,6 @@ retnul:
 	pop rdx
 	pop rsi
 	call _ft_memcpy
-	;add rsp, 32
-	;leave
 	ret
 
 retnul2:

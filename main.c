@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/07/01 14:59:13 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/08/23 13:34:46 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,14 +218,26 @@ int		main(void)
 
 	printf("\ncat test\n");
 	int fd;
-	fd = open("test1", O_RDONLY);
+	fd = open("test", O_RDONLY);
 	if (fd > 0)
 	{
 		printf("fd = %d\n", fd);
 		ft_cat(fd);
+		close(fd);
 	}
 	else
 		printf("erreur open (a tester plus tard)\n");
+	
+	fd = open("main.c", O_RDONLY);
+	if (fd > 0)
+	{
+		printf("fd = %d\n", fd);
+		ft_cat(fd);
+		close(fd);
+	}
+	else
+		printf("erreur open (a tester plus tard)\n");
+	
 	ssize_t a;
 
 	a = read(42, buf, 9);
@@ -234,8 +246,9 @@ int		main(void)
 	printf("\ncat test\n");
 	ft_cat(-1);
 	printf("\ncat test\n");
-	ft_cat(0);
+	ft_cat(3);
 	printf("\ncat test\n");
 	ft_cat(42);
+	
 	return (0);
 }
