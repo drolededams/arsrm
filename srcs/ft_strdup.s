@@ -20,7 +20,9 @@ _ft_strdup:
 	pop r8
 	pop rdx
 	pop rsi
+	push r12
 	call _ft_memcpy
+	pop r12
 	ret
 
 retnul:

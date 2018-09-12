@@ -156,16 +156,16 @@ int					main(void)
 //	D_ADD_TEST(strncat);
 //#define	D_STRLCAT
 //	D_ADD_TEST(strlcat);
-//#define	D_STRCHR
-//	D_ADD_TEST(strchr); fait
+#define	D_STRCHR
+	D_ADD_TEST(strchr); //fait
 //#define	D_STRRCHR
 //	D_ADD_TEST(strrchr);
 //#define	D_STRSTR
 //	D_ADD_TEST(strstr);
 //#define	D_STRNSTR
 //	D_ADD_TEST(strnstr);
-//#define	D_STRCMP
-//	D_ADD_TEST(strcmp); fait
+#define	D_STRCMP
+	D_ADD_TEST(strcmp); //fait
 //#define	D_STRNCMP
 //	D_ADD_TEST(strncmp);
 //#define	D_ATOI

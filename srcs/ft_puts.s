@@ -25,11 +25,13 @@ nl:
 	mov rdx, rax
 	mov rax, 0x02000004
 	syscall
+	push r12
 	mov rdi, 1
 	lea rsi, [rel new_line + 6]
 	mov rdx, 1
 	mov rax, 0x02000004
 	syscall
+	pop r12
 	pop rdi
 	ret
 

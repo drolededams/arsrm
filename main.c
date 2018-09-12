@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/08/23 13:34:46 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/12 16:21:00 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_cat(int fd);
 int		main(void)
 {
 	char buf[9];
-	bzero(buf, 9);
+	ft_bzero(buf, 9);
 	ft_strcat(buf, "");
 	ft_strcat(buf, "Bon");
 	ft_strcat(buf, "j");
@@ -89,7 +89,7 @@ int		main(void)
 	printf("cat str1 + str2 = %s\n", ft_strcat(cstr, str2));
 	printf("str 1 = %s\n", cstr);
 
-	bzero(buf, 9);
+	ft_bzero(buf, 9);
 	ft_strcat(buf, "");
 	ft_strcat(buf, "Bon");
 	ft_strcat(buf, "j");
@@ -100,7 +100,8 @@ int		main(void)
 	if (buf == ft_strcat(buf, ""))
 		printf("buf oko = %s\n", buf);
 
-	printf("\nalpha test\n");
+
+		printf("\nalpha test\n");
 	printf("a = %d\n", ft_isalpha('a'));
 	printf("z = %d\n", ft_isalpha('z'));
 	printf("A = %d\n", ft_isalpha('A'));
@@ -246,9 +247,29 @@ int		main(void)
 	printf("\ncat test\n");
 	ft_cat(-1);
 	printf("\ncat test\n");
-	ft_cat(3);
+	ft_cat(4);
 	printf("\ncat test\n");
 	ft_cat(42);
+
+	printf("\nstrchr test\n");
+	printf("%s\n", buf);
+	printf("%s\n", ft_strchr(buf, 0));
 	
+	char btr[2] = "b";
+	
+	printf("\nstrrev test\n");
+	printf("%s\n", buf);
+	printf("%s\n", ft_strrev(buf));
+	printf("%s\n", buf);
+	printf("%s\n", btr);
+	printf("%s\n", ft_strrev(btr));
+	printf("%s\n", ft_strrev("9876543210"));
+	printf("%s\n", ft_strrev(NULL));
+
+	printf("\nputchar test\n");
+	ft_putchar('8');
+
+	printf("\nputnbr test\n");
+	ft_putnbr(123456789);
 	return (0);
 }

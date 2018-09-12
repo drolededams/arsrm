@@ -18,11 +18,13 @@ looping:
 	jc return
 	cmp rax, 0x00
 	jle return
+	push r14
 	mov rdi, 1
 	lea rsi, [rel buffer]
 	mov rdx, rax
 	mov rax, 0x02000004
 	syscall
+	pop r14
 	jmp looping
 
 return:

@@ -1,4 +1,4 @@
-
+//include sizet ?
 
 void	ft_bzero(void *s, size_t n);
 char	*ft_strcat(char *dest, const char *src);
@@ -16,3 +16,7 @@ char	*ft_strdup(const char *s1);
 void	ft_cat(int fd);
 int		ft_isalnum(int c);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strrev(char *str);
+void	ft_putnbr(int n);
+void	ft_putchar(char c);

@@ -7,7 +7,9 @@ _ft_strchr:
 	xor rax, rax
 	push rdi
 	push rsi
+	push r12
 	call _ft_strlen
+	pop r12
 	pop rsi
 	pop rdi
 	cmp rax, 0

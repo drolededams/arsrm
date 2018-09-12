@@ -11,7 +11,9 @@ _ft_isalnum:
 	call _ft_isalpha
 	cmp rax, 0x01
 	je return
+	push r12
 	call _ft_isdigit
+	pop r12
 
 return:
 	pop rsi
