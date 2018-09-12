@@ -1,4 +1,18 @@
-//include sizet ?
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libfta.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/12 16:43:42 by dgameiro          #+#    #+#             */
+/*   Updated: 2018/09/12 16:44:15 by dgameiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBFTA_H
+# define LIBFTA_H
+# include <stdlib.h>
 
 void	ft_bzero(void *s, size_t n);
 char	*ft_strcat(char *dest, const char *src);
@@ -20,3 +34,5 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strrev(char *str);
 void	ft_putnbr(int n);
 void	ft_putchar(char c);
+
+#endif
