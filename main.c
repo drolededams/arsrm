@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/13 13:57:22 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:06:47 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,92 +17,49 @@
 #include <ctype.h>
 #include <libfta.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_GREEN "\x1b[32m"
 #define ANSI_COLOR_RESET "\x1b[0m"
-//puts cat test
-//segf memcpy
-/*void	ft_bzero(void *s, size_t n);
-char	*ft_strcat(char *dest, const char *src);
-int		ft_isalpha(int c);
-int		ft_isdigit(int c);
-int		ft_isascii(int c);
-int		ft_isprint(int c);
-int		ft_toupper(int c);
-int		ft_tolower(int c);
-int		ft_puts(const char *s);
-size_t	ft_strlen(const char *s);
-void	*ft_memset(void *b, int c, size_t len);
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
-char	*ft_strdup(const char *s1);
-void	ft_cat(int fd);
-*/
+// putchar punbr test
+// mem test seg
 //gcc -Wall -Wextra -Werror -I./ -L./ -lfts main.c
 int		main(void)
 {
-	char buf[9];
-	ft_bzero(buf, 9);
-	ft_strcat(buf, "");
-	ft_strcat(buf, "Bon");
-	ft_strcat(buf, "j");
-	ft_strcat(buf, "our.");
-	printf("buf = %s\n", buf);
-	if (strcmp(buf, "Bonjour.") == 0)
-		printf("buf ok = %s\n", buf);
-	if (buf == ft_strcat(buf, ""))
-		printf("buf oko = %s\n", buf);
-	char		*ret1;
-	char		*ret2;
-	
+	int error = 0;
+
+/*
+ * *********** bzero ***********
+ */
+
 	printf("bzero test\n");
-	ret1 = strdup("");
-	printf("bzero test\n");
-	ret2 = ft_strdup("");
-	printf("bzero test\n");
-	ft_puts(ret2);
-	if (strcmp(ret1, ret2) != 0)
-		printf("No match 1st test\n");
-	printf("bzero test\n");
-	free(ret1);
-	printf("bzero test\n");
-	free(ret2);
-	printf("bzero test\n");
-	ret1 = strdup("hello");
-	printf("bzero test\n");
-	ret2 = ft_strdup("hello");
-	printf("bzero test\n");
-	if (strcmp(ret1, ret2) != 0)
-		printf("No match 2nd test\n");
-	free(ret1);
-	free(ret2);
+
 	char str[6] = "Salut";
-	char cstr[13] = "Salut       ";
-	cstr[5] = 0;
-	char str2[8] = " Ca va?";
-	char *str3;
-	//str3 = (char*)calloc(4, 4);
-	str3 = (char*)malloc(16);
-	
-
-	printf("bzero test\n");
-
-	int er_bzero = 0;
 	char *bzstr = strdup(str);
 
 	ft_bzero(str, 5);
 	bzero(bzstr, 5);
 
 	if(memcmp(str, bzstr, sizeof(str)) != 0)
-		er_bzero++;
+		error++;
 
-	if (er_bzero)
-		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", er_bzero);
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\nstrcat test\n");
+/*
+ * *********** strcat ***********
+ */
+
+	printf("strcat test\n");
 	
-	int error = 0;
+	error = 0;
+	char buf[9];
+	char cstr[13] = "Salut       ";
+	cstr[5] = 0;
+	char str2[8] = " Ca va?";
 	
 	if(strcmp("Salut Ca va?", ft_strcat(cstr, str2)) != 0)
 		error++;
@@ -122,7 +79,11 @@ int		main(void)
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 
-	printf("\nalpha test\n");
+/*
+ * *********** alpha ***********
+ */
+
+	printf("alpha test\n");
 	error = 0;
 	int			i;
 
@@ -138,7 +99,11 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\ndigit test\n");
+
+/*
+ * *********** digit ***********
+ */
+	printf("digit test\n");
 	error = 0;
 
 	i = -300;
@@ -153,7 +118,11 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\nascii test\n");
+
+/*
+ * *********** ascii ***********
+ */
+	printf("ascii test\n");
 	error = 0;
 
 	i = -300;
@@ -168,7 +137,11 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\nisprint test\n");
+
+/*
+ * *********** isprint ***********
+ */
+	printf("isprint test\n");
 	error = 0;
 
 	i = -300;
@@ -183,7 +156,11 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\nisalnum test\n");
+
+/*
+ * *********** isalnum ***********
+ */
+	printf("isalnum test\n");
 	error = 0;
 
 	i = -300;
@@ -198,7 +175,11 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\ntoUPPER test\n");
+
+/*
+ * *********** toupper ***********
+ */
+	printf("toUPPER test\n");
 	error = 0;
 
 	i = -300;
@@ -212,8 +193,12 @@ int		main(void)
 		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
-	
-	printf("\nTOlower test\n");
+
+
+/*
+ * *********** tolower ***********
+ */
+	printf("TOlower test\n");
 	error = 0;
 
 	i = -300;
@@ -228,7 +213,11 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\nstrlen test\n");
+
+/*
+ * *********** strlen ***********
+ */
+	printf("strlen test\n");
 	
 	error = 0;
 
@@ -248,8 +237,15 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\nmemset test\n");
 
+/*
+ * *********** memset ***********
+ */
+	printf("memset test\n");
+
+	
+	char *str3;
+	str3 = (char*)malloc(16);
 	char *mtstr3 = strdup(str3);
 	error = 0;
 
@@ -263,7 +259,11 @@ int		main(void)
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	printf("\nmemcpy test\n");
+
+/*
+ * *********** memcpy ***********
+ */
+	printf("memcpy test\n");
 	char *mmcstr = strdup(cstr);
 	error = 0;
 
@@ -271,55 +271,70 @@ int		main(void)
 		error++;
 	if (memcmp(memcpy(mtstr3, mmcstr, 8), ft_memcpy(str3, cstr, 8), 8) != 0)
 		error++;
-	ft_memcpy(NULL, NULL, 0);
+	ft_memcpy(NULL, NULL, 3);
 	if (error)
 		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 
-	printf("\nstrdup test\n");
+/*
+ * *********** strdup ***********
+ */
+	printf("strdup test\n");
+
+	char		*ret1;
+	char		*ret2;
 	char *str4;
 	char *str5;
 	char *str6;
-	char *str7;
+	char *cstr4;
+	char *cstr5;
+	char *cstr6;
+
+	error = 0;
+
 	str4 = ft_strdup(cstr);
 	str5 = ft_strdup("42");
-	ft_puts(str4);
-	printf("str5 = %s\n", str5);
-	ft_puts(str5);
-	ft_puts(ft_strdup(cstr));
-	ft_puts(cstr);
+	cstr4 = ft_strdup(cstr);
+	cstr5 = ft_strdup("42");
 	str6 = ft_strdup("");
-	str7 = strdup("");
-	if (strcmp(str6, str7) != 0)
-		printf("No match 1st test\n");
-	printf("free str7\n");
-	free(str7);
-	printf("free str6\n");
+	cstr6 = strdup("");
+
+	if (strcmp(str4, cstr4) != 0)
+		error++;
+	if (strcmp(str5, cstr5) != 0)
+		error++;
+	if (strcmp(str6, cstr6) != 0)
+		error++;
+
 	free(str6);
-	printf("dup str6\n");
+	free(cstr6);
 	str6 = ft_strdup("hello");
-	printf("dup str7\n");
-	str7 = strdup("hello");
-	if (strcmp(str6, str7) != 0)
-		printf("No match 2nd test\n");
+	cstr6 = strdup("hello");
+	if (strcmp(str6, cstr6) != 0)
+		error++;
 	free(str6);
-	free(str7);
+	free(cstr6);
 
 	ret1 = strdup("");
 	ret2 = ft_strdup("");
 	if (strcmp(ret1, ret2) != 0)
-		printf("No match 1st test\n");
+		error++;
 	free(ret1);
 	free(ret2);
+	
 	ret1 = strdup("hello");
 	ret2 = ft_strdup("hello");
 	if (strcmp(ret1, ret2) != 0)
-		printf("No match 2nd test\n");
+		error++;
 	free(ret1);
 	free(ret2);
 
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 	/*printf("\ncat test\n");
 	int fd;
 	fd = open("test", O_RDONLY);
@@ -353,61 +368,324 @@ int		main(void)
 	ft_cat(4);
 	printf("\ncat test\n");
 	ft_cat(42);
+*/
 
-	printf("\nstrchr test\n");
-	printf("%s\n", buf);
-	printf("%s\n", ft_strchr(buf, 0));
-	*/
-	char btr[2] = "b";
+
+/*
+ * *********** strcat ***********
+ */
+
+	printf("cat test\n");
+
+	error = 0;
+
+	int pids[2];
+	struct stat	data;
+	char buf2[10];
+	int saved_stdout;
+	int fd;
+	void *ptr;
+
+	saved_stdout = dup(1);
+	pipe(pids);
+	dup2(pids[1], 1);
+
+	system("echo '12345678912345678' > catout");
+	fd = open("catout", O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	ft_cat(fd);
+	read(pids[0], buf2, 17);
+	dup2(saved_stdout, 1);
+
+	close(fd);
+	close(pids[0]);
+	close(pids[1]);
+	close(saved_stdout);
+	system("rm catout");
+	if (memcmp(buf2, "12345678912345678", 17) != 0)
+		error++;
+
+	if ((fd = open("main.c", O_RDONLY)) < 0)
+		return (-2);
+	if (fstat(fd, &data) == -1)
+		return (-3);
+	if ((ptr = mmap(0, data.st_size, PROT_READ, MAP_PRIVATE, fd, 0)) == MAP_FAILED)
+		return (-4);
 	
-	printf("\nstrrev test\n");
-	printf("%s\n", buf);
-	printf("%s\n", ft_strrev(buf));
-	printf("%s\n", buf);
-	printf("%s\n", btr);
-	printf("%s\n", ft_strrev(btr));
-	printf("%s\n", ft_strrev("9876543210"));
-	printf("%s\n", ft_strrev(NULL));
+	char buf3[data.st_size];
+	saved_stdout = dup(1);
+	pipe(pids);
+	dup2(pids[1], 1);
+	ft_cat(fd);
+	read(pids[0], buf3, data.st_size);
+	dup2(saved_stdout, 1);
+	close(fd);
+	close(pids[0]);
+	close(pids[1]);
 
-	printf("\nputchar test\n");
-	ft_putchar('8');
+	if (memcmp(buf3, ptr, data.st_size) != 0)
+		error++;
 
-	printf("\nputnbr test\n");
-	ft_putnbr(123456789);
+	munmap(ptr, data.st_size);
 
-	printf("\natoi test\n");
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+
+/*
+ * *********** puts ***********
+ */
+
+	printf("puts test\n");
+
+	error = 0;
+	int		ret;
+	int		ft_puts_ret1;
+	int		out;
+	int		p[2];
+	char	buf4[10000];
+	char	buf5[10000];
+
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_puts_ret1 = ft_puts("aaa");
+	dup2(out, 1);
+	ret = read(p[0], buf4, 10000);
+	buf4[ret] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	puts("aaa");
+	dup2(out, 1);
+	ret = read(p[0], buf5, 10000);
+	buf5[ret] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+
+	if (strcmp(buf4, buf5) != 0)
+		error++;
+	if (ft_puts_ret1 < 0)
+		error++;
+
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_puts_ret1 = ft_puts(NULL);
+	dup2(out, 1);
+	ret = read(p[0], buf4, 10000);
+	buf4[ret] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	puts(NULL);
+	dup2(out, 1);
+	ret = read(p[0], buf5, 10000);
+	buf5[ret] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+
+	if (strcmp(buf4, buf5) != 0)
+		error++;
+	if (ft_puts_ret1 < 0)
+		error++;
+
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+/*
+ * *********** strchr ***********
+ */
+
+	printf("strchr test\n");
+	error = 0;
+	if(ft_strchr(buf, 0) != strchr(buf,0))
+		error++;
+	if(ft_strchr(buf, 'B') != strchr(buf,'B'))
+		error++;
+	if(ft_strchr(buf, 'o') != strchr(buf,'o'))
+		error++;
+	if(ft_strchr(buf, 'Y') != strchr(buf,'Y'))
+		error++;
+	
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+
+/*
+ * *********** strrev ***********
+ */
+	printf("strrev test\n");
+	
+	char btr[2] = "b";
+
+	error = 0;
+	if(strcmp(ft_strrev(buf), ".ruojnoB") != 0)
+		error++;
+	if(strcmp(ft_strrev(btr), "b") != 0)
+		error++;
+	if(strcmp(ft_strrev("9876543210"), "0123456789") != 0)
+		error++;
+	if (ft_strrev(NULL) != NULL)
+		error++;
+
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+/*
+ * *********** strcmp ***********
+ */
+	printf("strcmp test\n");
+	
+	int a;
+
+	error = 0;
+	a = ft_strcmp("abc", "abc");
+	if (a != strcmp("abc", "abc"))
+		error++;
+	if (a)
+		error++;
+	a = ft_strcmp("cba", "abc");
+	if (a != strcmp("cba", "abc"))
+		error++;
+	if (!a)
+		error++;
+	a = ft_strcmp("abc", "cba");
+	if (a != strcmp("abc", "cba"))
+		error++;
+	if (!a)
+		error++;
+	if (ft_strcmp("", "") != strcmp("", ""))
+		error++;
+	if (ft_strcmp("-123", "-123") != strcmp("-123", "-123"))
+		error++;
+	if (ft_strcmp("-123", "-1223") != strcmp("-123", "-1223"))
+		error++;
+	if (ft_strcmp("-123", "123") != strcmp("-123", "123"))
+		error++;
+	if (ft_strcmp("-123", "-12") != strcmp("-123", "-12"))
+		error++;
+	if (ft_strcmp("-12", "-123") != strcmp("-12", "-123"))
+		error++;
+
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+
+/*
+ * *********** putchar ***********
+ */
+
+	printf("putchar test\n");
+	error = 0;
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_putchar('-');
+	ft_putchar('b');
+	ft_putchar('\n');
+	dup2(out, 1);
+	read(p[0], buf3, 3);
+	buf3[3] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+	
+	if(strcmp(buf3, "-b\n") != 0)
+		error++;
+
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+
+/*
+ * *********** putnbr ***********
+ */
+
+	printf("putnbr test\n");
+	error = 0;
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_putnbr(0);
+	ft_putnbr(1);
+	ft_putnbr(-1);
+	ft_putnbr(123);
+	ft_putnbr(-123);
+	ft_putnbr(2147483647);
+	ft_putnbr(-2147483648);
+	dup2(out, 1);
+	a = read(p[0], buf4, 100);
+	buf4[a] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+
+	if (strcmp(buf4, "01-1123-1232147483647-2147483648") != 0)
+		error++;
+
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+/*
+ * *********** atoi ***********
+ */
+	printf("atoi test\n");
 	char num[5] = "1234";
-	int er_atoi = 0;
+	error = 0;
 	if (atoi("\n\v\t\r\f -123") != ft_atoi("\n\v\t\r\f -123"))
-		er_atoi++;
+		error++;
 	if (atoi("12-3") != ft_atoi("12-3"))
-		er_atoi++;
+		error++;
 	if (atoi("-+123") != ft_atoi("-+123"))
-		er_atoi++;
+		error++;
 	if (atoi("a123") != ft_atoi("a123"))
-		er_atoi++;
+		error++;
 	if (atoi("123a") != ft_atoi("123a"))
-		er_atoi++;
+		error++;
 	if (atoi("123") != ft_atoi("123"))
-		er_atoi++;
+		error++;
 	if (atoi("-123") != ft_atoi("-123"))
-		er_atoi++;
+		error++;
 	if (atoi("+123") != ft_atoi("+123"))
-		er_atoi++;
+		error++;
 	if (atoi(" - 123") != ft_atoi(" - 123"))
-		er_atoi++;
+		error++;
 	if (atoi("\t -123") != ft_atoi("\t -123"))
-		er_atoi++;
+		error++;
 	if (atoi("-2147483648") != ft_atoi("-2147483648"))
-		er_atoi++;
+		error++;
 	if (atoi("2147483647") != ft_atoi("2147483647"))
-		er_atoi++;
+		error++;
 	if (atoi("") != ft_atoi(""))
-		er_atoi++;
+		error++;
 	if (atoi(num) != ft_atoi(num))
-		er_atoi++;
-	if (er_atoi)
-		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", er_atoi);
+		error++;
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
 	else
 		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
