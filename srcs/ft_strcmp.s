@@ -10,13 +10,19 @@ _ft_strcmp:
 loop:
 	cmp byte [rdi], 0
 	je diff
-	cmp dil, sil
+	xor rax, rax
+	xor rdx, rdx
+	mov al, [rdi]
+	mov dl, [rsi]
+	cmp al, dl
 	jne diff
 	inc rdi
 	inc rsi
 	jmp loop
 
 diff:
+	xor rax, rax
+	xor rdx, rdx
 	mov al, [rdi]
 	mov dl, [rsi]
 	sub rax, rdx

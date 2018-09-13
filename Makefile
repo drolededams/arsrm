@@ -6,7 +6,7 @@
 #    By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/12 15:32:27 by dgameiro          #+#    #+#              #
-#    Updated: 2018/09/12 14:23:48 by dgameiro         ###   ########.fr        #
+#    Updated: 2018/09/13 11:10:47 by dgameiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_PATH = srcs
 SRC_NAME = ft_bzero.s ft_cat.s ft_isalpha.s ft_isascii.s ft_isdigit.s \
 ft_isprint.s ft_memcpy.s ft_memset.s ft_puts.s ft_strcat.s ft_strdup.s \
 ft_strlen.s ft_tolower.s ft_toupper.s ft_isalnum.s ft_strchr.s ft_strcmp.s \
-ft_strrev.s ft_putnbr.s ft_putchar.s
+ft_strrev.s ft_putnbr.s ft_putchar.s ft_atoi.s
 
 OBJ_PATH = objs
 

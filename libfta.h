@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 16:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/12 16:44:15 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/13 11:11:13 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strrev(char *str);
 void	ft_putnbr(int n);
 void	ft_putchar(char c);
+int		ft_atoi(const char *str);
 
 #endif

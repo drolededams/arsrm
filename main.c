@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/12 16:21:00 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/13 13:57:22 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <ctype.h>
 #include <libfta.h>
 #include <unistd.h>
-
+#define ANSI_COLOR_RED "\x1b[31m"
+#define ANSI_COLOR_GREEN "\x1b[32m"
+#define ANSI_COLOR_RESET "\x1b[0m"
+//puts cat test
+//segf memcpy
 /*void	ft_bzero(void *s, size_t n);
 char	*ft_strcat(char *dest, const char *src);
 int		ft_isalpha(int c);
@@ -48,6 +53,7 @@ int		main(void)
 		printf("buf oko = %s\n", buf);
 	char		*ret1;
 	char		*ret2;
+	
 	printf("bzero test\n");
 	ret1 = strdup("");
 	printf("bzero test\n");
@@ -79,100 +85,197 @@ int		main(void)
 	
 
 	printf("bzero test\n");
-	printf("Avant = %s\n", str);
+
+	int er_bzero = 0;
+	char *bzstr = strdup(str);
+
 	ft_bzero(str, 5);
-	printf("Après = %s\n", str);
+	bzero(bzstr, 5);
+
+	if(memcmp(str, bzstr, sizeof(str)) != 0)
+		er_bzero++;
+
+	if (er_bzero)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", er_bzero);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 	printf("\nstrcat test\n");
-	printf("str 1 = %s\n", cstr);
-	printf("str 2 = %s\n", str2);
-	printf("cat str1 + str2 = %s\n", ft_strcat(cstr, str2));
-	printf("str 1 = %s\n", cstr);
+	
+	int error = 0;
+	
+	if(strcmp("Salut Ca va?", ft_strcat(cstr, str2)) != 0)
+		error++;
 
-	ft_bzero(buf, 9);
+	bzero(buf, 9);
 	ft_strcat(buf, "");
 	ft_strcat(buf, "Bon");
 	ft_strcat(buf, "j");
 	ft_strcat(buf, "our.");
-	printf("buf = %s\n", buf);
-	if (strcmp(buf, "Bonjour.") == 0)
-		printf("buf ok = %s\n", buf);
-	if (buf == ft_strcat(buf, ""))
-		printf("buf oko = %s\n", buf);
+	if (strcmp(buf, "Bonjour.") != 0)
+		error++;
+	if (strcmp(buf, ft_strcat(buf, "")) != 0)
+		error++;
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 
-		printf("\nalpha test\n");
-	printf("a = %d\n", ft_isalpha('a'));
-	printf("z = %d\n", ft_isalpha('z'));
-	printf("A = %d\n", ft_isalpha('A'));
-	printf("Z = %d\n", ft_isalpha('Z'));
-	printf("2 = %d\n", ft_isalpha('2'));
-	printf("@ = %d\n", ft_isalpha('@'));
-	printf("{ = %d\n", ft_isalpha('{'));
-	printf("[ = %d\n", ft_isalpha('['));
-	printf("r = %d\n", ft_isalpha('r'));
-	printf("R = %d\n", ft_isalpha('R'));
+	printf("\nalpha test\n");
+	error = 0;
+	int			i;
+
+	i = -300;
+	while (i < 300)
+	{
+		if (isalpha(i) != ft_isalpha(i))
+			error++;
+		i++;
+	}
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 	printf("\ndigit test\n");
-	printf("0 = %d\n", ft_isdigit('0'));
-	printf("5 = %d\n", ft_isdigit('5'));
-	printf("9 = %d\n", ft_isdigit('9'));
-	printf(": = %d\n", ft_isdigit(':'));
+	error = 0;
+
+	i = -300;
+	while (i < 300)
+	{
+		if (isdigit(i) != ft_isdigit(i))
+			error++;
+		i++;
+	}
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 	printf("\nascii test\n");
-	printf(": = %d\n", ft_isascii(':'));
-	printf("128 = %d\n", ft_isascii(128));
-	printf("-1 = %d\n", ft_isascii(-1));
-	printf("0 = %d\n", ft_isascii(0));
-	printf("127 = %d\n", ft_isascii(127));
+	error = 0;
+
+	i = -300;
+	while (i < 300)
+	{
+		if (isascii(i) != ft_isascii(i))
+			error++;
+		i++;
+	}
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 	printf("\nisprint test\n");
-	printf(": = %d\n", ft_isprint(':'));
-	printf("31 no = %d\n", ft_isprint(31));
-	printf("127 no = %d\n", ft_isprint(127));
-	printf("sp = %d\n", ft_isprint(' '));
+	error = 0;
+
+	i = -300;
+	while (i < 300)
+	{
+		if (isprint(i) != ft_isprint(i))
+			error++;
+		i++;
+	}
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+	printf("\nisalnum test\n");
+	error = 0;
+
+	i = -300;
+	while (i < 300)
+	{
+		if (isalnum(i) != ft_isalnum(i))
+			error++;
+		i++;
+	}
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 	printf("\ntoUPPER test\n");
-	printf("a = %c\n", ft_toupper('a'));
-	printf("A = %c\n", ft_toupper('A'));
-	printf("z = %c\n", ft_toupper('z'));
-	printf("t = %c\n", ft_toupper('t'));
-	printf("{ = %c\n", ft_toupper('{'));
+	error = 0;
 
+	i = -300;
+	while (i < 300)
+	{
+		if (toupper(i) != ft_toupper(i))
+			error++;
+		i++;
+	}
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+	
 	printf("\nTOlower test\n");
-	printf("a = %c\n", ft_tolower('a'));
-	printf("A = %c\n", ft_tolower('A'));
-	printf("z = %c\n", ft_tolower('z'));
-	printf("t = %c\n", ft_tolower('t'));
-	printf("{ = %c\n", ft_tolower('{'));
-	printf("Z = %c\n", ft_tolower('Z'));
+	error = 0;
 
-	printf("\nPuts and strlen test\n");
-	printf("add %p\n", cstr);
-	printf("len %lu\n", ft_strlen(cstr));
-	ft_puts(cstr);
-	printf("add %p\n", cstr);
-	printf("str 1 = %s\n", cstr);
-	printf("len %lu\n", ft_strlen(cstr));
+	i = -300;
+	while (i < 300)
+	{
+		if (tolower(i) != ft_tolower(i))
+			error++;
+		i++;
+	}
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
-	ft_puts("aaa");
-	ft_puts(NULL);
+	printf("\nstrlen test\n");
+	
+	error = 0;
+
+	if(strlen(cstr) != ft_strlen(cstr))
+		error++;
+	if(strlen(str) != ft_strlen(str))
+		error++;
+	if(strlen(buf) != ft_strlen(buf))
+		error++;
+	if (strlen("") != ft_strlen(""))
+		error++;
+	if (strlen("123") != ft_strlen("123"))
+		error++;
+
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 	printf("\nmemset test\n");
-	ft_puts(str3);
-	printf("len %lu\n", ft_strlen(str3));
-	ft_puts(ft_memset(str3, 101, 10));
-	ft_puts(str3);
-	printf("len %lu\n", ft_strlen(str3));
-	ft_memset(str3, 'A', 11);
-	ft_puts(str3);
-	printf("len %lu\n", ft_strlen(str3));
 
-	printf("\nmemcpy test\n");//overlap a faire
-	ft_memcpy(str3, cstr, 5);
-	ft_puts(str3);
-	ft_puts(cstr);
-	ft_puts(ft_memcpy(str3, cstr, 8));
+	char *mtstr3 = strdup(str3);
+	error = 0;
+
+	if (memcmp(memset(mtstr3, 101, 10), ft_memset(str3, 101, 10), sizeof(str3)) != 0)
+		error++;
+	if (memcmp(memset(mtstr3, 'A', 11), ft_memset(str3, 'A', 11), sizeof(str3)) != 0)
+		error++;
+
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
+	printf("\nmemcpy test\n");
+	char *mmcstr = strdup(cstr);
+	error = 0;
+
+	if (memcmp(memcpy(mtstr3, mmcstr, 5), ft_memcpy(str3, cstr, 5), 5) != 0)
+		error++;
+	if (memcmp(memcpy(mtstr3, mmcstr, 8), ft_memcpy(str3, cstr, 8), 8) != 0)
+		error++;
+	ft_memcpy(NULL, NULL, 0);
+	if (error)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
 
 
 	printf("\nstrdup test\n");
@@ -217,7 +320,7 @@ int		main(void)
 	free(ret1);
 	free(ret2);
 
-	printf("\ncat test\n");
+	/*printf("\ncat test\n");
 	int fd;
 	fd = open("test", O_RDONLY);
 	if (fd > 0)
@@ -254,7 +357,7 @@ int		main(void)
 	printf("\nstrchr test\n");
 	printf("%s\n", buf);
 	printf("%s\n", ft_strchr(buf, 0));
-	
+	*/
 	char btr[2] = "b";
 	
 	printf("\nstrrev test\n");
@@ -271,5 +374,42 @@ int		main(void)
 
 	printf("\nputnbr test\n");
 	ft_putnbr(123456789);
+
+	printf("\natoi test\n");
+	char num[5] = "1234";
+	int er_atoi = 0;
+	if (atoi("\n\v\t\r\f -123") != ft_atoi("\n\v\t\r\f -123"))
+		er_atoi++;
+	if (atoi("12-3") != ft_atoi("12-3"))
+		er_atoi++;
+	if (atoi("-+123") != ft_atoi("-+123"))
+		er_atoi++;
+	if (atoi("a123") != ft_atoi("a123"))
+		er_atoi++;
+	if (atoi("123a") != ft_atoi("123a"))
+		er_atoi++;
+	if (atoi("123") != ft_atoi("123"))
+		er_atoi++;
+	if (atoi("-123") != ft_atoi("-123"))
+		er_atoi++;
+	if (atoi("+123") != ft_atoi("+123"))
+		er_atoi++;
+	if (atoi(" - 123") != ft_atoi(" - 123"))
+		er_atoi++;
+	if (atoi("\t -123") != ft_atoi("\t -123"))
+		er_atoi++;
+	if (atoi("-2147483648") != ft_atoi("-2147483648"))
+		er_atoi++;
+	if (atoi("2147483647") != ft_atoi("2147483647"))
+		er_atoi++;
+	if (atoi("") != ft_atoi(""))
+		er_atoi++;
+	if (atoi(num) != ft_atoi(num))
+		er_atoi++;
+	if (er_atoi)
+		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", er_atoi);
+	else
+		printf(ANSI_COLOR_GREEN   "OK"   ANSI_COLOR_RESET "\n");
+
 	return (0);
 }
