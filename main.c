@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/13 17:06:47 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:18:01 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		main(void)
 
 	if(memcmp(str, bzstr, sizeof(str)) != 0)
 		error++;
+	free(bzstr);
 
 	if (error)
 		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
@@ -272,6 +273,9 @@ int		main(void)
 	if (memcmp(memcpy(mtstr3, mmcstr, 8), ft_memcpy(str3, cstr, 8), 8) != 0)
 		error++;
 	ft_memcpy(NULL, NULL, 3);
+	free(str3);
+	free(mtstr3);
+	free(mmcstr);
 	if (error)
 		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
 	else
@@ -308,6 +312,10 @@ int		main(void)
 	if (strcmp(str6, cstr6) != 0)
 		error++;
 
+	free(str4);
+	free(cstr4);
+	free(str5);
+	free(cstr5);
 	free(str6);
 	free(cstr6);
 	str6 = ft_strdup("hello");
@@ -533,16 +541,23 @@ int		main(void)
 	printf("strrev test\n");
 	
 	char btr[2] = "b";
+	char *fub;
+	char *rtb;
+	char *mun;
 
 	error = 0;
-	if(strcmp(ft_strrev(buf), ".ruojnoB") != 0)
+	if(strcmp((fub = ft_strrev(buf)), ".ruojnoB") != 0)
 		error++;
-	if(strcmp(ft_strrev(btr), "b") != 0)
+	if(strcmp((rtb = ft_strrev(btr)), "b") != 0)
 		error++;
-	if(strcmp(ft_strrev("9876543210"), "0123456789") != 0)
+	if(strcmp((mun = ft_strrev("9876543210")), "0123456789") != 0)
 		error++;
 	if (ft_strrev(NULL) != NULL)
 		error++;
+
+	free(fub);
+	free(rtb);
+	free(mun);
 
 	if (error)
 		printf(ANSI_COLOR_RED "KO %d error(s)"  ANSI_COLOR_RESET "\n", error);
