@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/13 17:18:01 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/14 09:48:41 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,6 @@ int		main(void)
  */
 	printf("memset test\n");
 
-	
 	char *str3;
 	str3 = (char*)malloc(16);
 	char *mtstr3 = strdup(str3);
