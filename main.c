@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:49:03 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 09:48:41 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/14 10:34:31 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,35 @@
 #include <string.h>
 #include <fcntl.h>
 #include <ctype.h>
-#include <libfta.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_GREEN "\x1b[32m"
 #define ANSI_COLOR_RESET "\x1b[0m"
-// putchar punbr test
-// mem test seg
-//gcc -Wall -Wextra -Werror -I./ -L./ -lfts main.c
+
+void	ft_bzero(void *s, size_t n);
+char	*ft_strcat(char *dest, const char *src);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isascii(int c);
+int		ft_isprint(int c);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
+int		ft_puts(const char *s);
+size_t	ft_strlen(const char *s);
+void	*ft_memset(void *b, int c, size_t len);
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
+char	*ft_strdup(const char *s1);
+void	ft_cat(int fd);
+int		ft_isalnum(int c);
+char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strrev(char *str);
+void	ft_putnbr(int n);
+void	ft_putchar(char c);
+int		ft_atoi(const char *str);
+
 int		main(void)
 {
 	int error = 0;
